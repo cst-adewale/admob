@@ -69,14 +69,14 @@ export default function Navbar() {
   return (
     <nav className="bg-white">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-[52px]">
 
           {/* Left side */}
         <div className="flex items-center space-x-3">
           <Link href="/" className="flex items-center gap-3">
             <img src="krealight.png" alt="logo" className="h-9 w-9 object-contain" />
-            <img src="userp.jpeg" alt="avatar" className="h-5 w-5 rounded-lg" />
-            <span className="text-[9px] font-semibold text-gray-400">benevolenttimbiebot</span>
+            <img src="userp.jpeg" alt="avatar" className="h-5 w-5 rounded-lg ml-1" />
+            <span className="text-[10px] font-semibold text-gray-400 -mx-1">benevolentnimblebat</span>
           </Link>
       <svg
         className="accordion-arrow w-3 h-3 text-gray-400 cursor-pointer"
@@ -91,14 +91,14 @@ export default function Navbar() {
 </div>
 
           {/* Center floating island */}
-          <div className="flex justify-center items-center">
-            <div className="bg-[#f6f6f6] rounded-[15px] h-[52px] px-2 flex items-center space-x-0.5 mt-2">
+          <div className="flex justify-center items-center ml-12 mt-2">
+            <div className="bg-[#f6f6f6] rounded-[14px] h-[44px] w-[320px] flex items-center justify-between px-1">
               {icons.map((icon, idx) => (
                 <div
                   key={idx}
                   onClick={() => setSelected(idx)}
-                  className={`w-[50px] h-10 flex items-center justify-center cursor-pointer transition-all ${
-                  selected === idx ? 'bg-white rounded-[14px] shadow-sm' : 'bg-[#f6f6f6]'
+                  className={`w-[52px] h-[34px] flex items-center justify-center cursor-pointer transition-all ${
+                  selected === idx ? 'bg-white rounded-[12px] shadow-sm' : 'bg-[#f6f6f6]'
                   }`}
                 >
                   {icon.jsx}
@@ -107,11 +107,48 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Right side */}
-          <div className="flex items-center space-x-4">
-            <span className="text-gray-600 cursor-pointer">Login</span>
-            <span className="text-gray-600 cursor-pointer">Sign Up</span>
-          </div>
+            {/* Right side */}
+          <div className="flex items-center space-x-2">
+            {/* Gallery */}
+            <button type="button" className="flex items-center space-x-2 px-1.5 py-1 font-semibold rounded-[8px] bg-[#f6f6f6]">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 text-gray-700 -pr-2">
+            <path fillRule="evenodd" d="M2 4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4Zm10.5 5.707a.5.5 0 0 0-.146-.353l-1-1a.5.5 0 0 0-.708 0L9.354 9.646a.5.5 0 0 1-.708 0L6.354 7.354a.5.5 0 0 0-.708 0l-2 2a.5.5 0 0 0-.146.353V12a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5V9.707ZM12 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z" clipRule="evenodd" />
+          </svg>
+            <span className="text-[10px] text-gray-700">Gallery</span>
+          </button>
+          {/* Support */}
+          <button type="button" className="flex items-center space-x-2 px-1.5 py-1 font-semibold rounded-[8px] bg-[#f6f6f6]">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 text-gray-700">
+            <path d="M8 1a2 2 0 0 0-2 2v4a2 2 0 1 0 4 0V3a2 2 0 0 0-2-2Z" />
+              <path d="M4.5 7A.75.75 0 0 0 3 7a5.001 5.001 0 0 0 4.25 4.944V13.5h-1.5a.75.75 0 0 0 0 1.5h4.5a.75.75 0 0 0 0-1.5h-1.5v-1.556A5.001 5.001 0 0 0 13 7a.75.75 0 0 0-1.5 0 3.5 3.5 0 1 1-7 0Z" />
+          </svg>
+          <span className="text-[10px] text-gray-700">Support</span>
+        </button>
+
+          {/* Notification */}
+          <button type="button" className="w-6 h-6 flex items-center justify-center rounded-[6px] bg-[#f6f6f6]">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 text-gray-700">
+            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2Zm.104-14.938A5.002 5.002 0 0 0 3 6v3.086l-.707.707A1 1 0 0 0 3 11h10a1 1 0 0 0 .707-1.707L13 9.086V6a5.002 5.002 0 0 0-4.896-4.938Z" />
+          </svg>
+        </button>
+
+        {/* Toggle */}
+          <label className="flex items-center">
+          <input type="checkbox" className="sr-only peer" aria-label="Toggle theme" />
+            <span className="w-6 h-6 flex items-center justify-center rounded-[6px] bg-[#f6f6f6] peer-checked:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 text-gray-700">
+        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0ZM12.95 4.11a.75.75 0 1 0-1.06-1.06l-1.062 1.06a.75.75 0 0 0 1.061 1.062l1.06-1.061ZM15 8a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 15 8ZM11.89 12.95a.75.75 0 0 0 1.06-1.06l-1.06-1.062a.75.75 0 0 0-1.062 1.061l1.061 1.06ZM8 12a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 12ZM5.172 11.89a.75.75 0 0 0-1.061-1.062L3.05 11.89a.75.75 0 1 0 1.06 1.06l1.06-1.06ZM4 8a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 4 8ZM4.11 5.172A.75.75 0 0 0 5.173 4.11L4.11 3.05a.75.75 0 1 0-1.06 1.06l1.06 1.06Z" />
+      </svg>
+    </span>
+    <span className="hidden w-6 h-6 flex items-center justify-center rounded-[6px] bg-[#f6f6f6] peer-checked:flex">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 text-gray-700">
+        <path d="M14.438 10.148c.19-.425-.321-.787-.748-.601A5.5 5.5 0 0 1 6.453 2.31c.186-.427-.176-.938-.6-.748a6.501 6.501 0 1 0 8.585 8.586Z" />
+      </svg>
+    </span>
+  </label>
+
+  <img src="userp.jpeg" alt="User Avatar" className="h-5 w-5 rounded-full object-cover" />
+</div>
 
         </div>
       </div>
