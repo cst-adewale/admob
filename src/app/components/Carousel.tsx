@@ -16,7 +16,7 @@ const slides = [
 
 export default function Carousel() {
   return (
-    <div className="flex gap-16 overflow-x-auto p-4">
+    <div className="flex gap-10 overflow-x-auto p-4">
       {slides.map((slide) => (
         <div
           key={slide.id}

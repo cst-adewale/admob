@@ -74,9 +74,9 @@ export default function Navbar() {
           {/* Left side */}
         <div className="flex items-center space-x-3">
           <Link href="/" className="flex items-center gap-3">
-            <img src="krealight.png" alt="logo" className="h-11 w-11 object-contain" />
-            <img src="userp.jpeg" alt="avatar" className="h-6 w-6 rounded-lg" />
-            <span className="text-[12px] font-semibold text-gray-400">benevolenttimbiebot</span>
+            <img src="krealight.png" alt="logo" className="h-9 w-9 object-contain" />
+            <img src="userp.jpeg" alt="avatar" className="h-5 w-5 rounded-lg" />
+            <span className="text-[9px] font-semibold text-gray-400">benevolenttimbiebot</span>
           </Link>
       <svg
         className="accordion-arrow w-3 h-3 text-gray-400 cursor-pointer"
