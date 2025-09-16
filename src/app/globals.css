@@ -3,7 +3,7 @@
 
 /* Light theme (default) */
 :root {
-  --background: #ffffff; /* ✅ white background */
+  --background: #ffffff;
   --foreground: #171717;
   --font-inter: "Inter", Arial, Helvetica, sans-serif;
 }
@@ -17,12 +17,12 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter); /* ✅ Tailwind uses Inter */
-  --font-mono: var(--font-geist-mono); /* still using Geist Mono */
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-geist-mono);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-inter); /* ✅ Global Inter */
+  font-family: var(--font-inter);
 }
