@@ -109,13 +109,13 @@ export default function Carousel() {
             )}
 
             {/* dark overlay */}
-            <div className="absolute inset-0 bg-black/40"></div>
+            <div className="absolute inset-0 bg-black/25"></div>
 
             {/* First slide */}
 {idx === 0 && (
   <>
     {/* top-left */}
-    <div className="absolute top-6 left-6 uppercase text-xs font-bold text-white">
+    <div className="absolute top-6 left-6 uppercase text-[8.5px] font-semibold text-[#c1ae9d]">
       NEW IMAGE MODEL
     </div>
 
@@ -124,13 +124,13 @@ export default function Carousel() {
       <div className="text-2xl font-bold drop-shadow">
         {slide.text}
       </div>
-      <p className="mt-2 text-sm">
-        Generate complex images with the brand new and powerful WAN2.2
-        model. Exceptional prompt adherence and ultra realistic textures.
+      <p className="mt-2 text-[12px] text-[#c1c0c0]">
+        Generate complex images with the brand new and powerful<br /> WAN2.2
+        model. Exceptional prompt adherence and ultra-<br />realistic textures.
       </p>
     </div>
-    <button className="absolute bottom-6 right-6 bg-white text-black text-sm font-medium px-4 py-2 rounded-[20px]">
-      Try WAN2.2
+    <button className="absolute bottom-6 right-6 bg-white text-black text-[12px] font-semibold px-4 py-2.5 rounded-[20px]">
+      Try WAN 2.2
     </button>
   </>
 )}
@@ -139,17 +139,17 @@ export default function Carousel() {
             {/* Second slide  */}
             {idx === 1 && (
               <div className="absolute inset-0 flex flex-col justify-between p-6 text-white">
-                <div className="uppercase text-xs font-bold">
+                <div className="uppercase text-[8.5px] font-semibold text-[#dcdada]">
                   OPEN SOURCE MODEL
                 </div>
                 <div>
                   <div className="text-2xl font-bold drop-shadow">
                     {slide.text}
                   </div>
-                  <p className="mt-2 text-sm max-w-[95%]">
+                  <p className="mt-2 text-[12px] max-w-[95%]">
                     We're making the weights to our FLUX.1 Krea model open
-                    source. Download and run our model weights, read the
-                    technical reports, or generate with it on Krea model.
+                    source.<br /> Download and run our model weights, read the
+                    technical reports, or<br /> generate with it on Krea model.
                   </p>
                 </div>
               </div>
@@ -167,13 +167,13 @@ export default function Carousel() {
 
       {/* dots */}
       <div className="flex justify-center mt-4">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           {slides.map((_, i) => (
             <button
               key={i}
               onClick={() => scrollToIndex(i)}
               aria-label={`Go to slide ${i + 1}`}
-              className={`w-2.5 h-2.5 rounded-full ${
+              className={`w-[6.5px] h-[6.5px] rounded-full ${
                 i === current ? "bg-black" : "bg-[#dadada]"
               }`}
             />
@@ -186,14 +186,14 @@ export default function Carousel() {
         <button
           onClick={prev}
           aria-label="Previous"
-          className="bg-[#f6f6f6] p-2 rounded-full text-md"
+          className="bg-[#f6f6f6] p-3 rounded-full text-md"
         >
           &#8249;
         </button>
         <button
           onClick={next}
           aria-label="Next"
-          className="bg-[#f6f6f6] p-2 rounded-full text-md"
+          className="bg-[#f6f6f6] p-3 rounded-full text-md"
         >
           &#8250;
         </button>
