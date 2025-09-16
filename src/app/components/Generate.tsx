@@ -19,7 +19,7 @@ export default function Generate() {
             <h2 className="text-[17px] font-bold">Generate</h2>
 
     <div className="flex items-center gap-1 text-blue-600">
-      <span className="text-2xl -mb-1 tracking-widest">˅</span>
+      <span className="text-lg -mb-1 tracking-widest">˅</span>
       <button className="text-[12px] font-bold hover:underline">
         Show all
             </button>

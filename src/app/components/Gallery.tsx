@@ -11,7 +11,7 @@ export default function Gallery() {
         {/* Right Buttons */}
         <div className="flex space-x-3">
           {/* Legal */}
-          <button className="flex items-center space-x-2 rounded-full bg-[#f6f6f6] px-4 py-2 text-[12px] font-semibold">
+          <button className="flex items-center space-x-2 rounded-full bg-[#f6f6f6] px-2 py-1 text-[10px] -mr-6 font-semibold">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -29,7 +29,7 @@ export default function Gallery() {
           </button>
 
           {/* Pricing */}
-          <button className="flex items-center space-x-2 rounded-full bg-[#f6f6f6] px-4 py-2 text-[12px] font-semibold">
+          <button className="flex items-center space-x-2 rounded-full bg-[#f6f6f6] px-2 py-1 text-[10px] -mr-6 font-semibold">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
