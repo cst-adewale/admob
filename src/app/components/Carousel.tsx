@@ -78,7 +78,7 @@ export default function Carousel() {
   }, []);
 
   return (
-    <div className="relative w-full max-w-[1200px] mx-auto">
+    <div className="relative w-full max-w-[2400px] mx-auto">
       <div
   ref={trackRef}
   className="flex overflow-x-auto scroll-smooth hide-scrollbar py-2"
@@ -186,14 +186,14 @@ export default function Carousel() {
         <button
           onClick={prev}
           aria-label="Previous"
-          className="bg-[#f6f6f6] p-3 rounded-full text-md"
+          className="bg-[#f6f6f6] p-1 h-8 w-8 mt-2 rounded-full font-medium text-md"
         >
           &#8249;
         </button>
         <button
           onClick={next}
           aria-label="Next"
-          className="bg-[#f6f6f6] p-3 rounded-full text-md"
+          className="bg-[#f6f6f6] p-1 h-8 w-8 mt-2 rounded-full font-medium text-md"
         >
           &#8250;
         </button>
