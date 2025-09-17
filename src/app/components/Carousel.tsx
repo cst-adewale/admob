@@ -21,7 +21,7 @@ const slides: Slide[] = [
   { id: 10, image: "carousel4.png", text: "Slide 10 text" },
 ];
 
-export default function Carousel() {
+export default function Carousel({ darkMode }: { darkMode: boolean }) {
   const [current, setCurrent] = useState<number>(0);
   const trackRef = useRef<HTMLDivElement | null>(null);
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -80,15 +80,15 @@ export default function Carousel() {
   return (
     <div className="relative w-full max-w-[2400px] mx-auto">
       <div
-  ref={trackRef}
-  className="flex overflow-x-auto scroll-smooth hide-scrollbar py-2"
->
-  {slides.map((slide, idx) => (
-    <div
-      key={slide.id}
-      ref={(el) => { slideRefs.current[idx] = el; }}
-      className="relative flex-shrink-0 w-[700px] h-[370px] rounded-[15px] overflow-hidden bg-gray-200 mr-10 last:mr-0"
-    >
+        ref={trackRef}
+        className="flex overflow-x-auto scroll-smooth hide-scrollbar py-2"
+      >
+        {slides.map((slide, idx) => (
+          <div
+            key={slide.id}
+            ref={(el) => { slideRefs.current[idx] = el; }}
+            className="relative flex-shrink-0 w-[700px] h-[370px] rounded-[15px] overflow-hidden bg-gray-200 mr-10 last:mr-0"
+          >
             {/* image or video */}
             {slide.image && (
               <img
@@ -112,31 +112,30 @@ export default function Carousel() {
             <div className="absolute inset-0 bg-black/25"></div>
 
             {/* First slide */}
-{idx === 0 && (
-  <>
-    {/* top-left */}
-    <div className="absolute top-6 left-6 uppercase text-[8.5px] font-semibold text-[#c1ae9d]">
-      NEW IMAGE MODEL
-    </div>
+            {idx === 0 && (
+              <>
+                {/* top-left */}
+                <div className="absolute top-6 left-6 uppercase text-[8.5px] font-semibold text-[#c1ae9d]">
+                  NEW IMAGE MODEL
+                </div>
 
-    {/* bottom-left block */}
-    <div className="absolute left-6 bottom-6 text-white max-w-[90%]">
-      <div className="text-2xl font-bold drop-shadow">
-        {slide.text}
-      </div>
-      <p className="mt-2 text-[12px] text-[#c1c0c0]">
-        Generate complex images with the brand new and powerful<br /> WAN2.2
-        model. Exceptional prompt adherence and ultra-<br />realistic textures.
-      </p>
-    </div>
-    <button className="absolute bottom-6 right-6 bg-white text-black text-[12px] font-semibold px-4 py-2.5 rounded-[20px]">
-      Try WAN 2.2
-    </button>
-  </>
-)}
+                {/* bottom-left block */}
+                <div className="absolute left-6 bottom-6 text-white max-w-[90%]">
+                  <div className="text-2xl font-bold drop-shadow">
+                    {slide.text}
+                  </div>
+                  <p className="mt-2 text-[12px] text-[#c1c0c0]">
+                    Generate complex images with the brand new and powerful<br /> WAN2.2
+                    model. Exceptional prompt adherence and ultra-<br />realistic textures.
+                  </p>
+                </div>
+                <button className="absolute bottom-6 right-6 bg-white text-black text-[12px] font-semibold px-4 py-2.5 rounded-[20px]">
+                  Try WAN 2.2
+                </button>
+              </>
+            )}
 
-
-            {/* Second slide  */}
+            {/* Second slide */}
             {idx === 1 && (
               <div className="absolute inset-0 flex flex-col justify-between p-6 text-white">
                 <div className="uppercase text-[8.5px] font-semibold text-[#dcdada]">
@@ -186,20 +185,36 @@ export default function Carousel() {
         <button
           onClick={prev}
           aria-label="Previous"
-          className="bg-[#f6f6f6] p-1 h-8 w-8 mt-2 rounded-full font-medium text-md"
+          className={`p-2 h-8 w-8 mt-2 rounded-full ${darkMode ? 'bg-[#303030] border-[#464646] border-[1.5px]' : 'bg-[#f6f6f6]'}`}
         >
-          &#8249;
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={2.5}
+            stroke={darkMode ? '#ffffff' : '#000000'}
+            className="w-3 h-3"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+          </svg>
         </button>
         <button
           onClick={next}
           aria-label="Next"
-          className="bg-[#f6f6f6] p-1 h-8 w-8 mt-2 rounded-full font-medium text-md"
+          className={`mr-1 p-2 h-8 w-8 mt-2 rounded-full ${darkMode ? 'bg-[#303030] border-[#464646] border-[1.5px]' : 'bg-[#f6f6f6]'}`}
         >
-          &#8250;
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={2.5}
+            stroke={darkMode ? '#ffffff' : '#000000'}
+            className="w-3 h-3"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
         </button>
       </div>
-
-      
 
       <style jsx>{`
         .hide-scrollbar {

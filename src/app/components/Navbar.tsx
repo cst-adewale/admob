@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { JSX } from 'react/jsx-runtime';
 
@@ -7,22 +7,27 @@ const RightButton = ({ icon, label, onClick, darkMode }: { icon: JSX.Element; la
   <button
     type="button"
     onClick={onClick}
-    className={`flex items-center space-x-2 px-1.5 py-1 font-semibold rounded-[8px] ${darkMode ? 'bg-[#262626]' : 'bg-[#f6f6f6]'}`}
+    className={`flex items-center space-x-2 px-1.5 py-1 font-semibold rounded-[8px] ${
+      darkMode ? 'bg-[#303030] border-[1.5px] border-[#464646]' : 'bg-[#f6f6f6]'
+    }`}
   >
     {icon}
     {label && <span className="text-[10px] text-[var(--color-foreground)]">{label}</span>}
   </button>
 );
 
-export default function Navbar({ lightLogoSize = 'h-9 w-9', darkLogoSize = 'h-5 w-5 ml-2' }: { lightLogoSize?: string; darkLogoSize?: string }) {
+export default function Navbar({
+  lightLogoSize = 'h-9 w-9',
+  darkLogoSize = 'h-5 w-5 ml-2',
+  darkMode,
+  toggleTheme,
+}: {
+  lightLogoSize?: string;
+  darkLogoSize?: string;
+  darkMode: boolean;
+  toggleTheme: () => void;
+}) {
   const [selected, setSelected] = useState<number>(0);
-  const [darkMode, setDarkMode] = useState<boolean>(false);
-
-  useEffect(() => {
-    document.documentElement.dataset.theme = darkMode ? 'dark' : 'light';
-  }, [darkMode]);
-
-  const toggleTheme = () => setDarkMode(!darkMode);
 
   const getInvertFilter = (idx: number) => (selected === idx && darkMode ? 'none' : darkMode ? 'invert(1)' : 'none');
   const btnBg = darkMode ? 'bg-[#303030]' : 'bg-[#f6f6f6]';

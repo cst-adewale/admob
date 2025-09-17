@@ -1,6 +1,6 @@
 "use client";
 
-export default function Generate() {
+export default function Generate({ darkMode }: { darkMode: boolean }) {
   const items = [
     { id: 1, image: "image.png", title: "Image", subtext: "Generate images with custom styles in Flux and ideogram.", isNew: true },
     { id: 2, image: "video.png", title: "Video", subtext: "Generate videos with Hailuo, Pika, Runway, Luma, and more." },
@@ -14,17 +14,16 @@ export default function Generate() {
 
   return (
     <div className="px-8 py-12">
-        {/* Heading */}
-        <div className="flex justify-between items-center mb-4">
-            <h2 className="text-[17px] font-bold">Generate</h2>
-
-    <div className="flex items-center gap-1 text-blue-600">
-      <span className="text-lg -mb-1 tracking-widest">˅</span>
-      <button className="text-[12px] font-bold hover:underline">
-        Show all
-            </button>
+      {/* Heading */}
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-[17px] font-bold">Generate</h2>
+        <div className="flex items-center gap-1 text-blue-600">
+          <span className="text-lg -mb-1 tracking-widest">˅</span>
+          <button className="text-[12px] font-bold hover:underline">
+            Show all
+          </button>
         </div>
-    </div>
+      </div>
 
       {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -54,7 +53,9 @@ export default function Generate() {
             </div>
 
             {/* Open */}
-            <button className="bg-[#f6f6f6] rounded-xl px-4 py-1.5 text-[10px] -mr-0 font-bold shrink-0">
+            <button
+              className={`rounded-xl px-4 py-1.5 text-[10px] font-bold shrink-0 border ${darkMode ? 'bg-[#303030] border-[#464646] border-[1.5px]' : 'bg-[#f6f6f6] border-transparent'}`}
+            >
               Open
             </button>
           </div>
