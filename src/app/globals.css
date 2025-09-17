@@ -1,23 +1,19 @@
-/* app/globals.css */
 @import "tailwindcss";
 
-/* Default theme (light) */
-@theme {
-  --color-background: #ffffff;
+:root {
+  --color-background: #fffffe;
   --color-foreground: #171717;
   --font-sans: "Inter", Arial, Helvetica, sans-serif;
-  --font-mono: var(--font-geist-mono); /* if you have this defined */
+  --font-mono: var(--font-geist-mono);
 }
 
-/* Dark theme */
-@theme dark {
-  --color-background: #0a0a0a;
+:root[data-theme="dark"] {
+  --color-background: #202020;
   --color-foreground: #ededed;
   --font-sans: "Inter", Arial, Helvetica, sans-serif;
   --font-mono: var(--font-geist-mono);
 }
 
-/* Apply theme variables */
 body {
   background: var(--color-background);
   color: var(--color-foreground);
