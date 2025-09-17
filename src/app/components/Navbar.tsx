@@ -1,8 +1,20 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { JSX } from 'react/jsx-runtime';
 
-export default function Navbar() {
+const RightButton = ({ icon, label, onClick, darkMode }: { icon: JSX.Element; label?: string; onClick?: () => void; darkMode: boolean }) => (
+  <button
+    type="button"
+    onClick={onClick}
+    className={`flex items-center space-x-2 px-1.5 py-1 font-semibold rounded-[8px] ${darkMode ? 'bg-[#262626]' : 'bg-[#f6f6f6]'}`}
+  >
+    {icon}
+    {label && <span className="text-[10px] text-[var(--color-foreground)]">{label}</span>}
+  </button>
+);
+
+export default function Navbar({ lightLogoSize = 'h-9 w-9', darkLogoSize = 'h-5 w-5 ml-2' }: { lightLogoSize?: string; darkLogoSize?: string }) {
   const [selected, setSelected] = useState<number>(0);
   const [darkMode, setDarkMode] = useState<boolean>(false);
 
@@ -10,19 +22,25 @@ export default function Navbar() {
     document.documentElement.dataset.theme = darkMode ? 'dark' : 'light';
   }, [darkMode]);
 
-  const toggleTheme = () => {
-    setDarkMode(!darkMode);
-  };
+  const toggleTheme = () => setDarkMode(!darkMode);
+
+  const getInvertFilter = (idx: number) => (selected === idx && darkMode ? 'none' : darkMode ? 'invert(1)' : 'none');
+  const btnBg = darkMode ? 'bg-[#303030]' : 'bg-[#f6f6f6]';
+
+  const iconWrapper = (idx: number) =>
+    `w-[52px] h-[34px] flex items-center justify-center cursor-pointer transition-all ${
+      selected === idx ? 'bg-white rounded-[12px] shadow-sm' : btnBg
+    }`;
 
   const icons = [
     {
-      name: "Home",
+      name: 'Home',
       jsx: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
-          fill="currentColor"
-          className={`w-4 h-4 ${selected === 0 ? '' : 'text-[var(--color-foreground)]'}`}
+          className="w-4 h-4"
+          style={{ filter: getInvertFilter(0) }}
         >
           <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
           <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
@@ -30,13 +48,13 @@ export default function Navbar() {
       ),
     },
     {
-      name: "Image",
+      name: 'Image',
       jsx: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
-          fill="currentColor"
-          className={`w-4 h-4 ${selected === 1 ? '' : 'text-[var(--color-foreground)]'}`}
+          className="w-4 h-4"
+          style={{ filter: getInvertFilter(1) }}
         >
           <path
             fillRule="evenodd"
@@ -47,26 +65,26 @@ export default function Navbar() {
       ),
     },
     {
-      name: "Video",
+      name: 'Video',
       jsx: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
-          fill="currentColor"
-          className={`w-4 h-4 ${selected === 2 ? '' : 'text-[var(--color-foreground)]'}`}
+          className="w-4 h-4"
+          style={{ filter: getInvertFilter(2) }}
         >
           <path d="M4.5 4.5a3 3 0 0 0-3 3v9a3 3 0 0 0 3 3h8.25a3 3 0 0 0 3-3v-9a3 3 0 0 0-3-3H4.5ZM19.94 18.75l-2.69-2.69V7.94l2.69-2.69c.944-.945 2.56-.276 2.56 1.06v11.38c0 1.336-1.616 2.005-2.56 1.06Z" />
         </svg>
       ),
     },
     {
-      name: "Enhance",
+      name: 'Enhance',
       jsx: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
-          fill="currentColor"
-          className={`w-4 h-4 ${selected === 3 ? '' : 'text-[var(--color-foreground)]'}`}
+          className="w-4 h-4"
+          style={{ filter: getInvertFilter(3) }}
         >
           <path
             fillRule="evenodd"
@@ -77,26 +95,26 @@ export default function Navbar() {
       ),
     },
     {
-      name: "Realtime",
+      name: 'Realtime',
       jsx: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
-          fill="currentColor"
-          className={`w-4 h-4 ${selected === 4 ? '' : 'text-[var(--color-foreground)]'}`}
+          className="w-4 h-4"
+          style={{ filter: getInvertFilter(4) }}
         >
           <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75ZM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 0 1-1.875-1.875V8.625ZM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 0 1 3 19.875v-6.75Z" />
         </svg>
       ),
     },
     {
-      name: "Edit",
+      name: 'Edit',
       jsx: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
-          fill="currentColor"
-          className={`w-4 h-4 ${selected === 5 ? '' : 'text-[var(--color-foreground)]'}`}
+          className="w-4 h-4"
+          style={{ filter: getInvertFilter(5) }}
         >
           <path
             fillRule="evenodd"
@@ -106,13 +124,13 @@ export default function Navbar() {
       ),
     },
     {
-      name: "Asset",
+      name: 'Asset',
       jsx: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
-          fill="currentColor"
-          className={`w-4 h-4 ${selected === 6 ? '' : 'text-[var(--color-foreground)]'}`}
+          className="w-4 h-4"
+          style={{ filter: getInvertFilter(6) }}
         >
           <path
             fillRule="evenodd"
@@ -122,6 +140,13 @@ export default function Navbar() {
         </svg>
       ),
     },
+  ];
+
+  const rightButtons = [
+    { name: 'Gallery', icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" className="w-4 h-4" style={{ filter: darkMode ? 'invert(1)' : 'none' }}><path fillRule="evenodd" d="M2 4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4Zm10.5 5.707a.5.5 0 0 0-.146-.353l-1-1a.5.5 0 0 0-.708 0L9.354 9.646a.5.5 0 0 1-.708 0L6.354 7.354a.5.5 0 0 0-.708 0l-2 2a.5.5 0 0 0-.146.353V12a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5V9.707ZM12 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z" clipRule="evenodd" /></svg>, label: 'Gallery' },
+    { name: 'Support', icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" className="w-4 h-4" style={{ filter: darkMode ? 'invert(1)' : 'none' }}><path d="M8 1a2 2 0 0 0-2 2v4a2 2 0 1 0 4 0V3a2 2 0 0 0-2-2Z" /><path d="M4.5 7A.75.75 0 0 0 3 7a5.001 5.001 0 0 0 4.25 4.944V13.5h-1.5a.75.75 0 0 0 0 1.5h4.5a.75.75 0 0 0 0-1.5h-1.5v-1.556A5.001 5.001 0 0 0 13 7a.75.75 0 0 0-1.5 0 3.5 3.5 0 1 1-7 0Z" /></svg>, label: 'Support' },
+    { name: 'Notification', icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" className="w-4 h-4" style={{ filter: darkMode ? 'invert(1)' : 'none' }}><path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2Zm.104-14.938A5.002 5.002 0 0 0 3 6v3.086l-.707.707A1 1 0 0 0 3 11h10a1 1 0 0 0 .707-1.707L13 9.086V6a5.002 5.002 0 0 0-4.896-4.938Z" /></svg> },
+    { name: 'Theme', icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" className="w-4 h-4" style={{ filter: darkMode ? 'invert(1)' : 'none' }}><path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0ZM12.95 4.11a.75.75 0 1 0-1.06-1.06l-1.062 1.06a.75.75 0 0 0 1.061 1.062l1.06-1.061ZM15 8a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 15 8ZM11.89 12.95a.75.75 0 0 0 1.06-1.06l-1.06-1.062a.75.75 0 0 0-1.062 1.061l1.061 1.06ZM8 12a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 12ZM5.172 11.89a.75.75 0 0 0-1.061-1.062L3.05 11.89a.75.75 0 1 0 1.06 1.06l1.06-1.06ZM4 8a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 4 8ZM4.11 5.172A.75.75 0 0 0 5.173 4.11L4.11 3.05a.75.75 0 1 0-1.06 1.06l1.06 1.06Z" /></svg>, onClick: toggleTheme },
   ];
 
   return (
@@ -134,46 +159,36 @@ export default function Navbar() {
               <img
                 src={darkMode ? 'kreadark.png' : 'krealight.png'}
                 alt="logo"
-                className={darkMode ? 'h-9 w-9 object-contain' : 'h-9 w-9 object-contain'}
+                className={darkMode ? darkLogoSize : lightLogoSize + ' object-contain'}
               />
               <img
                 src="userp.jpeg"
                 alt="avatar"
                 className="h-5 w-5 rounded-lg ml-1"
-                style={{ filter: darkMode ? 'invert(1)' : 'none' }}
               />
               <span className="text-[10px] font-semibold text-[var(--color-foreground)] -mx-1">
                 benevolentnimblebat
               </span>
             </Link>
-            <svg
-              className="accordion-arrow w-3 h-3 text-[var(--color-foreground)] cursor-pointer"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2.5}
-              stroke="currentColor"
-              style={{ filter: darkMode ? 'invert(1)' : 'none' }}
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
-            </svg>
+            <div className="w-[52px] h-[34px] flex items-center justify-center cursor-pointer transition-all">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2.5}
+                stroke={darkMode ? '#ffffff' : '#000000'}
+                className="w-3 h-3"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
+              </svg>
+            </div>
           </div>
 
           {/* Center floating island */}
           <div className="flex justify-center items-center ml-12 mt-2">
-            <div
-              className={`${
-                darkMode ? 'bg-[#262626]' : 'bg-[#f6f6f6]'
-              } rounded-[14px] h-[44px] w-[320px] flex items-center justify-between px-1`}
-            >
+            <div className={`${btnBg} rounded-[14px] h-[44px] w-[320px] flex items-center justify-between px-1`}>
               {icons.map((icon, idx) => (
-                <div
-                  key={idx}
-                  onClick={() => setSelected(idx)}
-                  className={`w-[52px] h-[34px] flex items-center justify-center cursor-pointer transition-all ${
-                    selected === idx ? 'bg-white rounded-[12px] shadow-sm' : darkMode ? 'bg-[#262626]' : 'bg-[#f6f6f6]'
-                  }`}
-                >
+                <div key={idx} onClick={() => setSelected(idx)} className={iconWrapper(idx)}>
                   {icon.jsx}
                 </div>
               ))}
@@ -182,90 +197,19 @@ export default function Navbar() {
 
           {/* Right side */}
           <div className="flex items-center space-x-2">
-            {/* Gallery */}
-            <button
-              type="button"
-              className={`flex items-center space-x-2 px-1.5 py-1 font-semibold rounded-[8px] ${
-                darkMode ? 'bg-[#262626]' : 'bg-[#f6f6f6]'
-              }`}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                className="w-4 h-4 text-[var(--color-foreground)] -pr-2"
-                style={{ filter: darkMode ? 'invert(1)' : 'none' }}
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M2 4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4Zm10.5 5.707a.5.5 0 0 0-.146-.353l-1-1a.5.5 0 0 0-.708 0L9.354 9.646a.5.5 0 0 1-.708 0L6.354 7.354a.5.5 0 0 0-.708 0l-2 2a.5.5 0 0 0-.146.353V12a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5V9.707ZM12 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              <span className="text-[10px] text-[var(--color-foreground)]">Gallery</span>
-            </button>
-            {/* Support */}
-            <button
-              type="button"
-              className={`flex items-center space-x-2 px-1.5 py-1 font-semibold rounded-[8px] ${
-                darkMode ? 'bg-[#262626]' : 'bg-[#f6f6f6]'
-              }`}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                className="w-4 h-4 text-[var(--color-foreground)]"
-                style={{ filter: darkMode ? 'invert(1)' : 'none' }}
-              >
-                <path d="M8 1a2 2 0 0 0-2 2v4a2 2 0 1 0 4 0V3a2 2 0 0 0-2-2Z" />
-                <path d="M4.5 7A.75.75 0 0 0 3 7a5.001 5.001 0 0 0 4.25 4.944V13.5h-1.5a.75.75 0 0 0 0 1.5h4.5a.75.75 0 0 0 0-1.5h-1.5v-1.556A5.001 5.001 0 0 0 13 7a.75.75 0 0 0-1.5 0 3.5 3.5 0 1 1-7 0Z" />
-              </svg>
-              <span className="text-[10px] text-[var(--color-foreground)]">Support</span>
-            </button>
-
-            {/* Notification */}
-            <button
-              type="button"
-              className={`w-6 h-6 flex items-center justify-center rounded-[6px] ${
-                darkMode ? 'bg-[#262626]' : 'bg-[#f6f6f6]'
-              }`}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                className="w-4 h-4 text-[var(--color-foreground)]"
-                style={{ filter: darkMode ? 'invert(1)' : 'none' }}
-              >
-                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2Zm.104-14.938A5.002 5.002 0 0 0 3 6v3.086l-.707.707A1 1 0 0 0 3 11h10a1 1 0 0 0 .707-1.707L13 9.086V6a5.002 5.002 0 0 0-4.896-4.938Z" />
-              </svg>
-            </button>
-
-            {/* Toggle */}
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className={`w-6 h-6 flex items-center justify-center rounded-[6px] ${
-                darkMode ? 'bg-[#262626]' : 'bg-[#f6f6f6]'
-              }`}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                className="w-4 h-4 text-[var(--color-foreground)]"
-                style={{ filter: darkMode ? 'invert(1)' : 'none' }}
-              >
-                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0ZM12.95 4.11a.75.75 0 1 0-1.06-1.06l-1.062 1.06a.75.75 0 0 0 1.061 1.062l1.06-1.061ZM15 8a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 15 8ZM11.89 12.95a.75.75 0 0 0 1.06-1.06l-1.06-1.062a.75.75 0 0 0-1.062 1.061l1.061 1.06ZM8 12a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 12ZM5.172 11.89a.75.75 0 0 0-1.061-1.062L3.05 11.89a.75.75 0 1 0 1.06 1.06l1.06-1.06ZM4 8a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 4 8ZM4.11 5.172A.75.75 0 0 0 5.173 4.11L4.11 3.05a.75.75 0 1 0-1.06 1.06l1.06 1.06Z" />
-              </svg>
-            </button>
-
+            {rightButtons.map((button, idx) => (
+              <RightButton
+                key={idx}
+                icon={button.icon}
+                label={button.label}
+                onClick={button.onClick}
+                darkMode={darkMode}
+              />
+            ))}
             <img
               src="userp.jpeg"
               alt="User Avatar"
               className="h-5 w-5 rounded-full object-cover"
-              style={{ filter: darkMode ? 'invert(1)' : 'none' }}
             />
           </div>
         </div>
